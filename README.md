@@ -121,6 +121,7 @@ Open `create-masks-2obj-bg.py` (for 2 objects) or `create-masks-3obj-bg.py` (for
 
 ```python
 # Video Directory
+WORKING_DIR = "your-sam-dir"
 VIDEO_NAME = "your-video-name"  # Name of the video directory
 
 # Frame Selection (0-indexed)

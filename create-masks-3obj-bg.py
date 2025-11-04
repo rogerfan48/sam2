@@ -67,9 +67,10 @@ warnings.filterwarnings('ignore', category=UserWarning)
 # ============================================================================
 
 # Video Directory (should contain frames/ subdirectory)
+WORKING_DIR = "/work/rogerfan48/sam2"
 VIDEO_NAME = "object-cross"  # Name of the video directory
-VIDEO_DIR = f"/work/rogerfan48/segment-anything-2/assets/ycmong-dataset/{VIDEO_NAME}/frames"
-OUTPUT_DIR = f"/work/rogerfan48/segment-anything-2/assets/ycmong-dataset/{VIDEO_NAME}/masks"
+VIDEO_DIR = f"{WORKING_DIR}/assets/ycmong-dataset/{VIDEO_NAME}/frames"
+OUTPUT_DIR = f"{WORKING_DIR}/assets/ycmong-dataset/{VIDEO_NAME}/masks"
 
 # Frame Selection (0-indexed, matching SAM2 default format)
 # Frame 0 = 00000.jpg, Frame 10 = 00010.jpg, etc.
@@ -118,7 +119,7 @@ print("=" * 70)
 
 # Setup device
 os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
-os.chdir("/work/rogerfan48/segment-anything-2")
+os.chdir(WORKING_DIR)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")

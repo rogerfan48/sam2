@@ -66,9 +66,10 @@ warnings.filterwarnings('ignore', category=UserWarning)
 # ============================================================================
 
 # Video Directory (should contain frames/ subdirectory)
-VIDEO_NAME = "front-back-crossing4-hair"  # Name of the video directory
-VIDEO_DIR = f"/work/rogerfan48/segment-anything-2/assets/ycmong-dataset/{VIDEO_NAME}/frames"
-OUTPUT_DIR = f"/work/rogerfan48/segment-anything-2/assets/ycmong-dataset/{VIDEO_NAME}/masks"
+WORKING_DIR = "/work/rogerfan48/sam2"
+VIDEO_NAME = "not-linear-trajectory3-skirt"  # Name of the video directory
+VIDEO_DIR = f"{WORKING_DIR}/assets/ycmong-dataset/{VIDEO_NAME}/frames"
+OUTPUT_DIR = f"{WORKING_DIR}/assets/ycmong-dataset/{VIDEO_NAME}/masks"
 
 # SAM2 Model Configuration
 SAM2_CHECKPOINT = "./checkpoints/sam2.1_hiera_large.pt"
@@ -76,29 +77,31 @@ MODEL_CONFIG = "configs/sam2.1/sam2.1_hiera_l.yaml"
 
 # Frame Selection (0-indexed, matching SAM2 default format)
 # Frame 0 = 00000.jpg, Frame 10 = 00010.jpg, etc.
-OBJ1_FRAME_IDX = 26      # Frame number for obj1 (0 = 00000.jpg)
-OBJ2_FRAME_IDX = 26      # Frame number for obj2 (10 = 00010.jpg)
-VISUALIZATION_FRAME_IDX = 26  # Frame to use for visualization output
+OBJ1_FRAME_IDX = 0      # Frame number for obj1 (0 = 00000.jpg)
+OBJ2_FRAME_IDX = 0      # Frame number for obj2 (10 = 00010.jpg)
+VISUALIZATION_FRAME_IDX = 0  # Frame to use for visualization output
 
 # Object 1: Click Points and Labels
 # Format: [(x1, y1), (x2, y2), ...]
 # Labels: 1 = positive (inside object), 0 = negative (outside object)
 OBJ1_POINTS = [
-    (190, 110),
-    (270, 80),
-    (325, 225),
-    (220, 190)
+    (185, 85),
+    (160, 170),
+    (220, 300),
+    (210, 150),
+    (277, 166)
 ]
-OBJ1_LABELS = [1, 1, 1, 0]  # All positive clicks
+OBJ1_LABELS = [1, 1, 1, 1, 0]  # All positive clicks
 
 # Object 2: Click Points and Labels
 OBJ2_POINTS = [
-    (480, 50),
-    (420, 160),
-    (340, 440),
-    (450, 270)
+    (270, 205),
+    (255, 200),
+    (300, 215),
+    (307, 266),
+    (260, 185)
 ]
-OBJ2_LABELS = [1, 1, 1, 0]  # All positive clicks
+OBJ2_LABELS = [1, 1, 1, 0, 0]  # All positive clicks
 
 # ============================================================================
 # END OF CONFIG SECTION
@@ -110,7 +113,7 @@ print("=" * 70)
 
 # Setup device
 os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
-os.chdir("/work/rogerfan48/segment-anything-2")
+os.chdir(WORKING_DIR)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
